@@ -10,98 +10,98 @@ import * as AlertTypes from "./types";
 import { defineProps } from "./functions";
 
 export default function Alert() {
-  const { alert, setAlert } = useAppContext();
+	const { alert, setAlert } = useAppContext();
 
-  const { type, style, doThis, icon } = defineProps(alert);
+	const { type, style, doThis, icon } = defineProps(alert);
 
-  let renderButtons;
-  switch (type) {
-    case "ok-cancel":
-      renderButtons = (
-        <>
-          <Button
-            style={{
-              background: style.mainColor,
-              border: "1px solid rgba(0, 0, 0, 0.1)",
-              boxShadow: "2px 4px 10px rgba(0, 0, 0, 0.3)",
-              marginTop: "10px",
-            }}
-            onClick={() => {
-              doThis();
-              setAlert({});
-            }}
-          >
+	let renderButtons;
+	switch (type) {
+	case "ok-cancel":
+		renderButtons = (
+			<>
+				<Button
+					style={{
+						background: style.mainColor,
+						border: "1px solid rgba(0, 0, 0, 0.1)",
+						boxShadow: "2px 4px 10px rgba(0, 0, 0, 0.3)",
+						marginTop: "10px",
+					}}
+					onClick={() => {
+						doThis();
+						setAlert({});
+					}}
+				>
             Ok
-          </Button>
+				</Button>
 
-          <Button
-            style={{
-              background: style.mainColor,
-              border: "1px solid rgba(0, 0, 0, 0.1)",
-              boxShadow: "2px 4px 10px rgba(0, 0, 0, 0.3)",
-              marginTop: "10px",
-              filter: "grayscale(100%) invert(15%)",
-            }}
-            onClick={() => {
-              setAlert({});
-            }}
-          >
+				<Button
+					style={{
+						background: style.mainColor,
+						border: "1px solid rgba(0, 0, 0, 0.1)",
+						boxShadow: "2px 4px 10px rgba(0, 0, 0, 0.3)",
+						marginTop: "10px",
+						filter: "grayscale(100%) invert(15%)",
+					}}
+					onClick={() => {
+						setAlert({});
+					}}
+				>
             Cancel
-          </Button>
-        </>
-      );
-      break;
+				</Button>
+			</>
+		);
+		break;
 
-    default:
-      renderButtons = (
-        <>
-          <Button
-            style={{
-              background: style.mainColor,
-              border: "1px solid rgba(0, 0, 0, 0.1)",
-              boxShadow: "2px 4px 10px rgba(0, 0, 0, 0.3)",
-              marginTop: "10px",
-            }}
-            onClick={() => {
-              doThis();
-              setAlert({});
-            }}
-          >
+	default:
+		renderButtons = (
+			<>
+				<Button
+					style={{
+						background: style.mainColor,
+						border: "1px solid rgba(0, 0, 0, 0.1)",
+						boxShadow: "2px 4px 10px rgba(0, 0, 0, 0.3)",
+						marginTop: "10px",
+					}}
+					onClick={() => {
+						doThis();
+						setAlert({});
+					}}
+				>
             Ok
-          </Button>
-        </>
-      );
-      break;
-  }
+				</Button>
+			</>
+		);
+		break;
+	}
 
-  return (
-    <>
-      <Blur />
+	return (
+		<>
+			<Blur />
 
-      <Container alertStyle={style as AlertTypes.StyleType}>
-        <Layout alertStyle={style as AlertTypes.StyleType} />
+			<Container alertStyle={style as AlertTypes.StyleType}>
+				<Layout alertStyle={style as AlertTypes.StyleType} />
 
-        <IonIcon
-          name={icon}
-          style={{
-            fontSize: `${style.iconSize}px`,
-            color: style.mainColor,
-            filter: "brightness(1.03)",
-          }}
-          divStyle={{
-            position: "absolute",
-            top: `-${style.iconSize / 2 - 5}px`,
-            width: "fit-content",
-            height: "fit-content",
-          }}
-        />
+				<IonIcon
+					name={icon}
+					style={{
+						fontSize: `${style.iconSize}px`,
+						color: style.mainColor,
+						filter: "brightness(1.03)",
+					}}
+					divStyle={{
+						position: "absolute",
+						top: `-${style.iconSize / 2 - 5}px`,
+						width: "fit-content",
+						height: "fit-content",
+					}}
+				/>
 
-        <Message />
+				<Message />
 
-        {renderButtons}
-      </Container>
-    </>
-  );
+				{renderButtons}
+			</Container>
+		</>
+	);
 }
 
 const Container = styled.div<{ alertStyle: AlertTypes.StyleType }>`

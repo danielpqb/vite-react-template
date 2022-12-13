@@ -1,8 +1,15 @@
-import { createRoot } from "react-dom/client";
-import "tailwindcss/tailwind.css";
-import App from "components/App";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import { AppContextProvider } from "./contexts/AppContext";
+import { GlobalStyle } from "./global-styles";
 
-const container = document.getElementById("root") as HTMLDivElement;
-const root = createRoot(container);
+ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
+	<React.StrictMode>
+		<GlobalStyle />
 
-root.render(<App />);
+		<AppContextProvider>
+			<App />
+		</AppContextProvider>
+	</React.StrictMode>
+);
