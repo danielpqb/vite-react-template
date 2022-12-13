@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import promiseRetry from "promise-retry";
 import getUserDataByToken from "./services/api-services";
 import { Error, Response } from "./helpers/request";
