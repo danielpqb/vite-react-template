@@ -6,8 +6,8 @@ const config: Config = {
 	testPathIgnorePatterns: ["/node_modules/"],
 	collectCoverage: false,
 	collectCoverageFrom: ["src/**/*.ts(x)"],
-	setupFilesAfterEnv: ["<rootDir>/.jest/setup.ts"],
-	modulePaths: ["<rootDir>/src/", "<rootDir>/.jest"]
+	setupFilesAfterEnv: ["<rootDir>/src/tests/setup.ts"],
+	modulePaths: ["<rootDir>/src/"],
 };
 
 export default config;

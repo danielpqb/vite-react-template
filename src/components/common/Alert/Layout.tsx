@@ -1,19 +1,19 @@
 import styled from "styled-components";
-import { AlertStyleType } from "./types";
+import { StyleType } from "./types";
 
-export default function Layout({ alertStyle }: { alertStyle: AlertStyleType }) {
-  return (
-    <>
-      <Background alertStyle={alertStyle} />
+export default function Layout({ alertStyle }: { alertStyle: StyleType }) {
+	return (
+		<>
+			<Background alertStyle={alertStyle} />
 
-      <IconBackground alertStyle={alertStyle}>
-        <HideBorder alertStyle={alertStyle} />
-      </IconBackground>
-    </>
-  );
+			<IconBackground alertStyle={alertStyle}>
+				<HideBorder alertStyle={alertStyle} />
+			</IconBackground>
+		</>
+	);
 }
 
-const Background = styled.div<{ alertStyle: AlertStyleType }>`
+const Background = styled.div<{ alertStyle: StyleType }>`
   && {
     border: ${({ alertStyle }) => alertStyle.border};
     border-radius: 10px;
@@ -25,7 +25,7 @@ const Background = styled.div<{ alertStyle: AlertStyleType }>`
   }
 `;
 
-const IconBackground = styled.div<{ alertStyle: AlertStyleType }>`
+const IconBackground = styled.div<{ alertStyle: StyleType }>`
   && {
     position: absolute;
     top: -${({ alertStyle }) => alertStyle.iconSize / 2 - 5}px;
@@ -41,7 +41,7 @@ const IconBackground = styled.div<{ alertStyle: AlertStyleType }>`
   }
 `;
 
-const HideBorder = styled.div<{ alertStyle: AlertStyleType }>`
+const HideBorder = styled.div<{ alertStyle: StyleType }>`
   && {
     position: absolute;
     top: 50%;
