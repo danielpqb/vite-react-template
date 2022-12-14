@@ -15,7 +15,7 @@ export default function Button({
 }) {
   return (
     <Container
-      onClick={disabled ? () => {} : onClick}
+      onClick={disabled ? () => { } : onClick}
       style={{ ...style, background: undefined, filter: undefined, border: undefined }}
     >
       <Background

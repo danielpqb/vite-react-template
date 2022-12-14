@@ -4,16 +4,16 @@ import { AppContextProvider } from "contexts/AppContext";
 import { GlobalStyle } from "global-styles";
 
 describe("App component", () => {
-	it("should", () => {
-		render(
-			<>
-				<GlobalStyle />
+  it("should", () => {
+    render(
+      <>
+        <GlobalStyle />
 
-				<AppContextProvider>
-					<App />
-				</AppContextProvider>
-			</>
-		);
-		expect(1 + 1).toBe(2);
-	});
+        <AppContextProvider>
+          <App />
+        </AppContextProvider>
+      </>
+    );
+    expect(1 + 1).toBe(2);
+  });
 });

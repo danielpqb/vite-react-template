@@ -2,15 +2,15 @@ import styled from "styled-components";
 import { StyleType } from "./types";
 
 export default function Layout({ alertStyle }: { alertStyle: StyleType }) {
-	return (
-		<>
-			<Background alertStyle={alertStyle} />
+  return (
+    <>
+      <Background alertStyle={alertStyle} />
 
-			<IconBackground alertStyle={alertStyle}>
-				<HideBorder alertStyle={alertStyle} />
-			</IconBackground>
-		</>
-	);
+      <IconBackground alertStyle={alertStyle}>
+        <HideBorder alertStyle={alertStyle} />
+      </IconBackground>
+    </>
+  );
 }
 
 const Background = styled.div<{ alertStyle: StyleType }>`

@@ -13,7 +13,7 @@ export function defineProps(alertProps: Alert) {
   const props = { ...defaultProps, ...receivedProps };
 
   const receivedStyle = receivedProps?.style;
-  let style = { ...defaultStyle, ...receivedStyle };
+  const style = { ...defaultStyle, ...receivedStyle };
   defineStyle(props, style);
 
   return { ...props, style };
@@ -21,32 +21,32 @@ export function defineProps(alertProps: Alert) {
 
 function defineStyle(props: Alert, style: StyleType) {
   switch (props?.flag) {
-    case "red":
-      style.mainColor = "rgb(110, 0, 5)";
-      style.backgroundColor = defaultStyle.backgroundColor;
-      props.icon = "close-circle";
-      break;
-    case "green":
-      style.mainColor = "rgb(0, 80, 20)";
-      style.backgroundColor = defaultStyle.backgroundColor;
-      props.icon = "checkmark-circle";
-      break;
-    case "blue":
-      style.mainColor = "rgb(0, 40, 70)";
-      style.backgroundColor = defaultStyle.backgroundColor;
-      props.icon = "information-circle";
-      break;
-    case "orange":
-      style.mainColor = "rgb(140, 60, 0)";
-      style.backgroundColor = defaultStyle.backgroundColor;
-      props.icon = "close-circle";
-      break;
-    case "yellow":
-      style.mainColor = "rgb(200, 160, 0)";
-      style.backgroundColor = defaultStyle.backgroundColor;
-      props.icon = "alert-circle";
-      break;
-    default:
-      break;
+  case "red":
+    style.mainColor = "rgb(110, 0, 5)";
+    style.backgroundColor = defaultStyle.backgroundColor;
+    props.icon = "close-circle";
+    break;
+  case "green":
+    style.mainColor = "rgb(0, 80, 20)";
+    style.backgroundColor = defaultStyle.backgroundColor;
+    props.icon = "checkmark-circle";
+    break;
+  case "blue":
+    style.mainColor = "rgb(0, 40, 70)";
+    style.backgroundColor = defaultStyle.backgroundColor;
+    props.icon = "information-circle";
+    break;
+  case "orange":
+    style.mainColor = "rgb(140, 60, 0)";
+    style.backgroundColor = defaultStyle.backgroundColor;
+    props.icon = "close-circle";
+    break;
+  case "yellow":
+    style.mainColor = "rgb(200, 160, 0)";
+    style.backgroundColor = defaultStyle.backgroundColor;
+    props.icon = "alert-circle";
+    break;
+  default:
+    break;
   }
 }

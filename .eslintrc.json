@@ -22,7 +22,7 @@
     "rules": {
         "indent": [
             "error",
-            "tab"
+            2
         ],
         "linebreak-style": [
             "error",
@@ -52,6 +52,8 @@
                 "maxEOF": 0
             }
         ],
+        "object-curly-spacing": ["error", "always"],
+        "max-statements-per-line": ["error", { "max": 1 }],
         "@typescript-eslint/naming-convention": [
             "error",
             {
@@ -76,7 +78,10 @@
             }
         ],
         "react/react-in-jsx-scope": "off",
+        "react/jsx-max-props-per-line": [2, { "maximum": 1 }],
+        "react/jsx-first-prop-new-line": [2, "multiline"],
         "@typescript-eslint/no-use-before-define": "off",
-        "@typescript-eslint/no-explicit-any": "off"
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-empty-function": "off"
     }
 }
