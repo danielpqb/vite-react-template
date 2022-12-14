@@ -33,7 +33,7 @@ cd my-app
 Install dependencies.
 
 ```shell
-pnpm install
+pnpm i
 ```
 
 ### Run
