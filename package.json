@@ -1,6 +1,6 @@
 {
-  "name": "reactjs-vite-tailwindcss-boilerplate",
-  "description": "This is a React + vite boilerplate to be used with Tailwindcss.",
+  "name": "vite-react-template",
+  "description": "This is a React + Vite template.",
   "version": "0.1.0",
   "private": true,
   "author": {
@@ -61,7 +61,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.3.1",
-    "postcss": "^8.4.19",
     "prettier": "2.8.1",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4",
