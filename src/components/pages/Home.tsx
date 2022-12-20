@@ -22,10 +22,7 @@ export default function Home() {
 
 const Container = styled.div`
   & {
-    width: 100vw;
-
-    padding: 5px;
-
-    background-color: var(--background-a-color);
+    border: 5px solid var(--background-border-color);
+    border-radius: 5px;
   }
 `;

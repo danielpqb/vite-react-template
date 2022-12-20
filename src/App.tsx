@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useMemo } from "react";
+import { ReactNode, useEffect } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -14,7 +14,7 @@ import Alert from "components/common/Alert/Alert";
 export default function App() {
   const { setUserData, alert, counter } = useAppContext();
 
-  useConsoleLogVariables();
+  //useConsoleLogVariables();
 
   useEffect(() => {
     const localToken = localStorage.getItem("userToken");
@@ -58,12 +58,6 @@ const Layer1 = styled.div`
   & {
     width: 100vw;
 
-    padding: 5px;
-
-    background-color: var(--background-a-color);
-
-    @media (max-height: 400px) {
-      padding: 0px;
-    }
+    background-color: var(--background-color);
   }
 `;

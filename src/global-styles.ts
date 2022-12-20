@@ -4,17 +4,17 @@ export const GlobalStyle = createGlobalStyle`
   :root {
     --fontsize: 26px;
 
-    --background-a-color: #afafaf;
-    --background-b-color: #252525;
+    --background-color: #252525;
+    --background-border-color: #afafaf;
 
     --doc-heigth: 100%;
   }
 
   /* Hide scrollbar */
-  body::-webkit-scrollbar {
+  *::-webkit-scrollbar {
     display: none; /* Chrome, Safari and Opera */
   }
-  body {
+  * {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
