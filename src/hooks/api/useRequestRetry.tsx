@@ -12,6 +12,7 @@ export async function useRequestRetry(
   }
 ) {
   return await promiseRetry((retry, number) => {
+    console.log("retry", number);
     return promiseToRetry.catch(retry);
   }, retryOptions)
     .then((res: Response) => {

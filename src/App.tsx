@@ -9,12 +9,13 @@ import { useAppContext } from "./contexts/AppContext";
 import Home from "./components/pages/Home";
 import Alert from "components/common/Alert/Alert";
 import useUserData from "hooks/api/services/useUserData";
+import useToken from "hooks/api/useToken";
 
 export default function App() {
   const { alert, counter } = useAppContext();
 
-  const localToken = localStorage.getItem("userToken");
-  if (localToken) {
+  const token = useToken();
+  if (token) {
     const { userData, getUserData, userDataError, userDataLoading } = useUserData();
     console.log(userDataLoading);
   }

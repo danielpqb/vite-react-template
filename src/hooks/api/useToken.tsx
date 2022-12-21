@@ -1,7 +1,5 @@
-import { useAppContext } from "contexts/AppContext";
-
 export default function useToken() {
-  const { userData } = useAppContext();
+  const userToken = localStorage.getItem("userToken");
 
-  return userData.token;
+  return userToken as string;
 }
