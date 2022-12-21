@@ -10,7 +10,7 @@ export default function useUserData() {
     loading: userDataLoading,
     error: userDataError,
     act: getUserData,
-  } = useAsync(() => getUserDataByToken(token));
+  } = useAsync(() => getUserDataByToken(token), true);
 
   return {
     userData,

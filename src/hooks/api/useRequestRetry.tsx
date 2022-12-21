@@ -1,4 +1,3 @@
-import { useAlertOnRequestError } from "components/common/Alert/hooks/useAlertOnRequestError";
 import { Error, Response } from "helpers/request";
 import promiseRetry from "promise-retry";
 
@@ -12,17 +11,13 @@ export async function useRequestRetry(
     maxTimeout?: number;
   }
 ) {
-  await promiseRetry((retry, number) => {
-    console.log("retry", number);
+  return await promiseRetry((retry, number) => {
     return promiseToRetry.catch(retry);
-  }, retryOptions).then((res: Response) => {
-    console.log("success");
-    delete res.data.message;
-    return { data: res.data, success: false };
-  }),
-  (error: Error) => {
-    console.log("erro");
-    useAlertOnRequestError(error);
-    return { error: error, success: false };
-  };
+  }, retryOptions)
+    .then((res: Response) => {
+      return { data: res.data, success: true };
+    })
+    .catch((error: Error) => {
+      return { error: error, success: false };
+    });
 }

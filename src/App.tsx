@@ -13,17 +13,11 @@ import useUserData from "hooks/api/services/useUserData";
 export default function App() {
   const { alert, counter } = useAppContext();
 
-  const { userData } = useUserData();
-  console.log(userData);
-
-  //useConsoleLogVariables();
-
-  // useEffect(() => {
-  //   const localToken = localStorage.getItem("userToken");
-  //   if (localToken) {
-  //     //useRequestRetry(localToken, setUserData);
-  //   }
-  // }, [setUserData]);
+  const localToken = localStorage.getItem("userToken");
+  if (localToken) {
+    const { userData, getUserData, userDataError, userDataLoading } = useUserData();
+    console.log(userDataLoading);
+  }
 
   return (
     <>

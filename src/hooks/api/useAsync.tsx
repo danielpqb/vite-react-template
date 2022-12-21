@@ -10,24 +10,17 @@ export default function useAsync(handler: any, immediate = true) {
     setLoading(true);
     setError(null);
 
-    try {
-      const response = await useRequestRetry(handler(...args), { retries: 2 }) as any;
-      console.log("fora");
-      if (response.success === false) {
-        console.log("response.fail");
-        setLoading(false);
-        throw response.error;
-      }
-      if (response.success === true) {
-        console.log("response.success");
-        setData(response as any);
-        return response.data;
-      }
-    }
-    catch (err: any) {
+    const response = (await useRequestRetry(handler(...args), { retries: 2, minTimeout: 500 })) as any;
+
+    if (response.success === false) {
       setLoading(false);
-      setError(err);
+      setError(response.error);
+      return response.error;
     }
+
+    setLoading(false);
+    setData(response.data);
+    return response.data;
   };
 
   useEffect(() => {
