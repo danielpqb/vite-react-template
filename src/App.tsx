@@ -17,7 +17,6 @@ export default function App() {
   const token = useToken();
   if (token) {
     const { userData, getUserData, userDataError, userDataLoading } = useUserData();
-    console.log(userDataLoading);
   }
 
   return (
