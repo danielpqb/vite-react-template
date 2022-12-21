@@ -1,5 +1,5 @@
-import * as AlertTypes from "./components/common/Alert/types";
-import * as CouterTypes from "./components/common/Counter/types";
+import * as AlertTypes from "../components/common/Alert/types";
+import * as CouterTypes from "../components/common/Counter/types";
 
 export type AppStates = {
   userData: UserData;

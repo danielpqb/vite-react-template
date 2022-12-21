@@ -1,5 +1,5 @@
+import { useAppContext } from "contexts/AppContext";
 import { useMemo } from "react";
-import { useAppContext } from "./contexts/AppContext";
 
 export function useConsoleLogVariables() {
   const { userData } = useAppContext();
@@ -15,9 +15,7 @@ export function useConsoleLogVariables() {
       if (obj) {
         Object.entries(obj).forEach((keyValuePair) => {
           if (typeof keyValuePair[1] === "string") {
-            console.log(
-              `  ${paramColor}${keyValuePair[0]}: ${stringColor}'${keyValuePair[1]}'`
-            );
+            console.log(`  ${paramColor}${keyValuePair[0]}: ${stringColor}'${keyValuePair[1]}'`);
             return;
           }
           console.log(`  ${paramColor}${keyValuePair[0]}:`, keyValuePair[1]);
@@ -27,10 +25,7 @@ export function useConsoleLogVariables() {
     };
 
     console.clear();
-    console.log(
-      `%c\nuserData ${dependencyColor}(dependency)${resetColor}`,
-      headerColor
-    );
+    console.log(`%c\nuserData ${dependencyColor}(dependency)${resetColor}`, headerColor);
     separateParams(userData);
   }, [userData]);
 }

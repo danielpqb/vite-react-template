@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode, useState } from "react";
-import { AppStates } from "../global-types";
+import { AppStates } from "types/app-types";
 
 const AppContext = createContext({} as AppStates);
 

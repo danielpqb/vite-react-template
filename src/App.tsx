@@ -5,23 +5,25 @@ import styled from "styled-components";
 import Counter from "./components/common/Counter/Counter";
 import ProtectedRoute from "./components/common/ProtectedRoute";
 
-import { requestUserData } from "./global-functions";
 import { useAppContext } from "./contexts/AppContext";
 import Home from "./components/pages/Home";
-import { useConsoleLogVariables } from "global-hooks";
 import Alert from "components/common/Alert/Alert";
+import useUserData from "hooks/api/services/useUserData";
 
 export default function App() {
-  const { setUserData, alert, counter } = useAppContext();
+  const { alert, counter } = useAppContext();
+
+  const { userData } = useUserData();
+  console.log(userData);
 
   //useConsoleLogVariables();
 
-  useEffect(() => {
-    const localToken = localStorage.getItem("userToken");
-    if (localToken) {
-      requestUserData(localToken, setUserData);
-    }
-  }, [setUserData]);
+  // useEffect(() => {
+  //   const localToken = localStorage.getItem("userToken");
+  //   if (localToken) {
+  //     //useRequestRetry(localToken, setUserData);
+  //   }
+  // }, [setUserData]);
 
   return (
     <>
@@ -33,15 +35,13 @@ export default function App() {
           <Routes>
             <Route
               path="/"
-              element={<Home />} />
-            <Route
-              element={
-                <ProtectedRoute token={localStorage.getItem("userToken")} />
-              }
-            >
+              element={<Home />}
+            />
+            <Route element={<ProtectedRoute token={localStorage.getItem("userToken")} />}>
               <Route
                 path="*"
-                element={<Navigate to="/" />} />
+                element={<Navigate to="/" />}
+              />
             </Route>
           </Routes>
         </BrowserRouter>
