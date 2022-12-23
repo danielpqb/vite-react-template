@@ -9,3 +9,8 @@ export async function get(url: string, config?: AxiosRequestConfig<any> | undefi
   const promise = axios.get(url, config);
   return promise as RequestPromise;
 }
+
+export async function post(url: string, data: any, config?: AxiosRequestConfig<any> | undefined) {
+  const promise = axios.post(url, data, config);
+  return promise as RequestPromise;
+}
