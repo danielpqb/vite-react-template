@@ -1,4 +1,4 @@
-import getUserDataByToken from "services/user-services";
+import { getUserDataByToken } from "services/user-services";
 import useAsync from "../useAsync";
 import useToken from "../useToken";
 
