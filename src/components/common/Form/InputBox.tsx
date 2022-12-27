@@ -8,7 +8,7 @@ import { IoMdAlert } from "react-icons/io";
 
 import CheckBox from "./CheckBox";
 
-type InputBoxProps = {
+export type InputBoxProps = {
   name: string;
   placeholder: string;
   type?: string;
@@ -20,16 +20,10 @@ type InputBoxProps = {
   regex?: RegExp;
 };
 export default function InputBox({
-  name,
-  placeholder,
-  type,
-  onChange,
-  value,
-  height = "60px",
-  hasCheckBox,
-  hasIcon,
-  regex,
-}: InputBoxProps) {
+  data: { name, placeholder, type, onChange, value, height = "60px", hasCheckBox, hasIcon, regex },
+}: {
+  data: InputBoxProps;
+}) {
   const [isChecked, setIsChecked] = useState(false);
   const [isValidPattern, setIsValidPattern] = useState(true);
 
@@ -78,6 +72,11 @@ export default function InputBox({
         placeholder={placeholder}
         onChange={onChange}
       />
+      {!isValidPattern && (
+        <ShowIcon color={"rgb(190, 0, 0)"}>
+          <IoMdAlert />
+        </ShowIcon>
+      )}
       {hasCheckBox && (
         <ShowPassword>
           <CheckBox
@@ -88,11 +87,6 @@ export default function InputBox({
           />
           <div>Show</div>
         </ShowPassword>
-      )}
-      {!isValidPattern && (
-        <ShowIcon color={"rgb(190, 0, 0)"}>
-          <IoMdAlert />
-        </ShowIcon>
       )}
     </Container>
   );
@@ -105,6 +99,7 @@ const Container = styled.div<{ height: string; isValidPattern: boolean }>`
     height: ${({ height }) => height};
     margin: 10px 0px;
     border: ${({ isValidPattern }) => (isValidPattern ? "0px" : "3px")} solid rgb(190, 0, 0);
+    padding: 5px 10px;
   }
   input {
     font-family: "Oswald";
@@ -112,12 +107,12 @@ const Container = styled.div<{ height: string; isValidPattern: boolean }>`
     font-weight: 700;
     font-size: 22px;
     color: #6d6d6d;
-    padding: 10px;
     border: none;
     outline: none;
     border-radius: 5px;
     width: 100%;
     height: 100%;
+    padding: 0px 10px;
   }
   input::placeholder {
     color: #afafaf;
@@ -127,7 +122,9 @@ const Container = styled.div<{ height: string; isValidPattern: boolean }>`
 const ShowPassword = styled.div`
   & {
     flex-direction: column;
+    width: fit-content;
   }
+
   div:nth-child(2) {
     color: #9f9f9f;
     font-size: 12px;
@@ -136,8 +133,11 @@ const ShowPassword = styled.div`
 
 const ShowIcon = styled.div`
   & {
+    width: fit-content;
+  }
+
+  * {
     color: ${({ color }) => (color ? color : "rgb(70, 70, 70)")};
     font-size: 30px;
-    margin: 0px 5px;
   }
 `;

@@ -1,8 +1,8 @@
-import InputBox from "components/common/Form/InputBox";
-import SubmitButton from "components/common/Form/SubmitButton";
+import Form from "components/common/Form/Form";
+import { InputBoxProps } from "components/common/Form/InputBox";
 import { regexErrors } from "constants/regex-errors";
 import { useAppContext } from "contexts/AppContext";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { postSignUp } from "services/user-services";
 import styled from "styled-components";
@@ -53,50 +53,61 @@ export default function SignUp() {
     }
   }
 
+  const inputs: InputBoxProps[] = [
+    {
+      name: "name",
+      placeholder: "username",
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({ ...form, name: e.target.value });
+      },
+      value: form.name,
+      hasIcon: true,
+      regex: regexErrors.userName.pattern,
+    },
+    {
+      name: "email",
+      placeholder: "e-mail",
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({ ...form, email: e.target.value });
+      },
+      value: form.email,
+      hasIcon: true,
+      regex: regexErrors.userEmail.pattern,
+      height: "60px",
+    },
+    {
+      name: "password",
+      type: "password",
+      placeholder: "password",
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({ ...form, password: e.target.value });
+      },
+      value: form.password,
+      hasCheckBox: true,
+      hasIcon: true,
+      regex: regexErrors.userPassword.pattern,
+      height: "60px",
+    },
+  ];
+
   return (
     <Container>
-      <SignUpForm
-        action=""
-        onSubmit={handleSubmit}
-      >
-        <InputBox
-          name="name"
-          placeholder="username"
-          onChange={(e) => {
-            setForm({ ...form, name: e.target.value });
-          }}
-          value={form.name}
-          hasIcon={true}
-          regex={regexErrors.userName.pattern}
+      <Logo>
+        <img
+          src="/logo.svg"
+          alt=""
         />
-        <InputBox
-          name="email"
-          placeholder="e-mail"
-          onChange={(e) => {
-            setForm({ ...form, email: e.target.value });
-          }}
-          value={form.email}
-          hasIcon={true}
-          regex={regexErrors.userEmail.pattern}
-        />
-        <InputBox
-          name="password"
-          type="password"
-          placeholder="password"
-          onChange={(e) => {
-            setForm({ ...form, password: e.target.value });
-          }}
-          value={form.password}
-          hasCheckBox={true}
-          hasIcon={true}
-          regex={regexErrors.userPassword.pattern}
-        />
+      </Logo>
 
-        <SubmitButton disabled={isSubmitDisabled}>Sign Up</SubmitButton>
-      </SignUpForm>
+      <Form
+        inputs={inputs}
+        handleSubmit={handleSubmit}
+        isSubmitDisabled={isSubmitDisabled}
+        submitButtonText={"Sign Up"}
+      />
 
       <RedirectTo>
-        <Link to={"/"}>Switch back to log in</Link>
+        <Link to={"/sign-in"}>Switch back to log in</Link>
       </RedirectTo>
     </Container>
   );
@@ -104,52 +115,23 @@ export default function SignUp() {
 
 const Container = styled.div`
   & {
-    width: calc(100vw - (100vw - 100%));
-    min-height: 100vh;
     flex-direction: column;
-    padding: 20px;
+
+    width: calc(100vw - (100vw - 100%));
+    height: 100vh;
+
+    padding: 10px;
+
     font-weight: 700;
     font-size: 15px;
     color: #ffffff;
-  }
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  h1 {
-    margin: 30px 0px;
-  }
-  @media (min-width: 800px) {
-    & {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-`;
-
-const SignUpForm = styled.form`
-  & {
-    flex-direction: column;
-    width: 100%;
-    height: 50%;
-    text-align: center;
-    margin-top: 200px;
-  }
-  @media (min-width: 800px) {
-    & {
-      width: calc(40% - 20px);
-      text-align: center;
-      margin-top: 0px;
-      margin-left: calc(60% + 22px);
-    }
   }
 `;
 
 const RedirectTo = styled.div`
   & {
-    margin: 20px;
+    height: fit-content;
+    padding: 10px 0px;
   }
   a {
     font-family: "Lato";
@@ -159,9 +141,13 @@ const RedirectTo = styled.div`
     line-height: 20px;
     text-decoration-line: underline;
   }
-  @media (min-width: 800px) {
-    & {
-      margin-left: calc(60% + 22px);
-    }
+`;
+
+const Logo = styled.div`
+  & {
+    max-width: 20vh;
+    max-height: 20vh;
+
+    padding-bottom: 25px;
   }
 `;

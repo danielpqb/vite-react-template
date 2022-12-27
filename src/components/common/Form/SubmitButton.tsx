@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { StyledProps } from "styled-components";
 import { ThreeDots } from "react-loader-spinner";
 import React from "react";
 
@@ -6,13 +6,18 @@ export default function SubmitButton({
   children,
   disabled,
   onClick,
+  style,
 }: {
   children: React.ReactNode;
   disabled: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  style: React.CSSProperties;
 }) {
   return (
-    <Container onClick={onClick}>
+    <Container
+      onClick={onClick}
+      style={style}
+    >
       {disabled ? (
         <ThreeDots
           height="13"

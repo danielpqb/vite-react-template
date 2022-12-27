@@ -15,10 +15,8 @@ export default function OAuthContextProvider({ children }: { children: ReactNode
   const googleSignIn = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then((res) => {
-      const { displayName: name, email, photoURL } = res.user;
-
       setOAuthData(() => {
-        return { name, email, photoURL };
+        return res.user;
       });
     });
   };

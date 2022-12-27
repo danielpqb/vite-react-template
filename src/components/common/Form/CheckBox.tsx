@@ -19,25 +19,17 @@ export default function CheckBox({
       onClick={() => {
         setIsChecked(!isChecked);
       }}
+      color={color}
     >
-      {isChecked ? (
-        <BiCheckboxSquare
-          color={color}
-          size={size}
-        />
-      ) : (
-        <BiCheckbox
-          color={color}
-          size={size}
-        />
-      )}
+      {isChecked ? <BiCheckboxSquare size={size} /> : <BiCheckbox size={size} />}
     </Container>
   );
 }
 
 const Container = styled.div`
-  & {
+  * {
     display: flex;
-    margin: 0px 10px;
+
+    color: ${({ color }) => (color ? color : "rgb(70, 70, 70)")};
   }
 `;

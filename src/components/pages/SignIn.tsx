@@ -1,17 +1,21 @@
-import InputBox from "components/common/Form/InputBox";
-import SubmitButton from "components/common/Form/SubmitButton";
+import Form from "components/common/Form/Form";
+import { InputBoxProps } from "components/common/Form/InputBox";
 import { regexErrors } from "constants/regex-errors";
 import { useAppContext } from "contexts/AppContext";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { postSignIn } from "services/user-services";
 import styled from "styled-components";
+import GoogleButton from "react-google-button";
+import { useOAuthContext } from "contexts/OAuthContext";
 
 export default function SignIn() {
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
+
+  const { googleSignIn } = useOAuthContext();
 
   const navigate = useNavigate();
 
@@ -28,110 +32,98 @@ export default function SignIn() {
     setIsSubmitDisabled(true);
 
     const promise = postSignIn(form);
-    promise
-      .then((res) => {
-        localStorage.setItem("userToken", res.data.token);
+    promise.then((res) => {
+      localStorage.setItem("userToken", res.data.token);
 
-        setAlert({
-          show: true,
-          message: "You have loged in!",
-          flag: "green",
-        });
-
-        setIsSubmitDisabled(false);
-
-        navigate("/");
+      setAlert({
+        show: true,
+        message: "You have loged in!",
+        flag: "green",
       });
+
+      setIsSubmitDisabled(false);
+
+      navigate("/");
+    });
   }
+
+  const inputs: InputBoxProps[] = [
+    {
+      name: "email",
+      placeholder: "e-mail",
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({ ...form, email: e.target.value });
+      },
+      value: form.email,
+      hasIcon: true,
+      regex: regexErrors.userEmail.pattern,
+      height: "60px",
+    },
+    {
+      name: "password",
+      type: "password",
+      placeholder: "password",
+      onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+        setForm({ ...form, password: e.target.value });
+      },
+      value: form.password,
+      hasCheckBox: true,
+      hasIcon: true,
+      regex: regexErrors.userPassword.pattern,
+      height: "60px",
+    },
+  ];
 
   return (
     <Container>
-      <SignInForm
-        action=""
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
-        <InputBox
-          name="email"
-          placeholder="e-mail"
-          onChange={(e) => {
-            setForm({ ...form, email: e.target.value });
-          }}
-          value={form.email}
-          hasIcon={true}
-          regex={regexErrors.userEmail.pattern}
+      <Logo>
+        <img
+          src="/logo.svg"
+          alt=""
         />
+      </Logo>
 
-        <InputBox
-          name="password"
-          type="password"
-          hasCheckBox={true}
-          placeholder="password"
-          onChange={(e) => {
-            setForm({ ...form, password: e.target.value });
-          }}
-          value={form.password}
-          hasIcon={true}
-        />
-        <SubmitButton disabled={isSubmitDisabled}>Log In</SubmitButton>
-      </SignInForm>
+      <Form
+        inputs={inputs}
+        handleSubmit={handleSubmit}
+        isSubmitDisabled={isSubmitDisabled}
+        submitButtonText={"Sign In"}
+      />
 
       <RedirectTo>
         <Link to={"/sign-up"}>First time? Create an account!</Link>
       </RedirectTo>
+
+      <OAuthButtons>
+        <GoogleButton
+          onClick={() => {
+            googleSignIn();
+          }}
+        ></GoogleButton>
+      </OAuthButtons>
     </Container>
   );
 }
 
 const Container = styled.div`
   & {
+    flex-direction: column;
+
     width: calc(100vw - (100vw - 100%));
     min-height: 100vh;
-    flex-direction: column;
-    padding: 20px;
+
+    padding: 10px;
+
     font-weight: 700;
     font-size: 15px;
     color: #ffffff;
-  }
-  div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  h1 {
-    margin: 30px 0px;
-  }
-  @media (min-width: 800px) {
-    & {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-  }
-`;
-
-const SignInForm = styled.form`
-  & {
-    flex-direction: column;
-    width: 100%;
-    height: 50%;
-    text-align: center;
-    margin-top: 200px;
-  }
-  @media (min-width: 800px) {
-    & {
-      width: calc(40% - 20px);
-      text-align: center;
-      margin-top: 0px;
-      margin-left: calc(60% + 22px);
-    }
   }
 `;
 
 const RedirectTo = styled.div`
   & {
-    margin: 20px;
+    height: fit-content;
+    padding: 10px 0px;
   }
   a {
     font-family: "Lato";
@@ -141,9 +133,24 @@ const RedirectTo = styled.div`
     line-height: 20px;
     text-decoration-line: underline;
   }
-  @media (min-width: 800px) {
-    & {
-      margin-left: calc(60% + 22px);
-    }
+`;
+
+const Logo = styled.div`
+  & {
+    max-width: 20vh;
+    max-height: 20vh;
+
+    padding-bottom: 25px;
+  }
+`;
+
+const OAuthButtons = styled.div`
+  & {
+    padding: 30px 0px;
+    height: fit-content;
+  }
+
+  * {
+    font-size: 15px;
   }
 `;

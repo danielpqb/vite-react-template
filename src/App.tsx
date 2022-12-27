@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -10,6 +10,8 @@ import Home from "./components/pages/Home";
 import Alert from "components/common/Alert/Alert";
 import useUserData from "hooks/api/services/useUserData";
 import useToken from "hooks/api/useToken";
+import SignUp from "components/pages/SignUp";
+import SignIn from "components/pages/SignIn";
 
 export default function App() {
   const { alert, counter } = useAppContext();
@@ -30,6 +32,14 @@ export default function App() {
             <Route
               path="/"
               element={<Home />}
+            />
+            <Route
+              path="/sign-in"
+              element={<SignIn />}
+            />
+            <Route
+              path="/sign-up"
+              element={<SignUp />}
             />
             <Route element={<ProtectedRoute token={localStorage.getItem("userToken")} />}>
               <Route
