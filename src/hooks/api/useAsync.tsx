@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRequestRetry } from "./useRequestRetry";
 
-export default function useAsync(handler: any, immediate = true) {
+export default function useAsync(handler: any, immediate = false, retry = false) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(immediate);
   const [error, setError] = useState(null);
@@ -10,17 +10,36 @@ export default function useAsync(handler: any, immediate = true) {
     setLoading(true);
     setError(null);
 
-    const response = (await useRequestRetry(handler(...args), { retries: 2, minTimeout: 500 })) as any;
+    if (retry === true) {
+      const response = (await useRequestRetry(handler(...args), {
+        retries: 2,
+        minTimeout: 500,
+      })) as any;
 
-    if (response.success === false) {
+      if (response.success === false) {
+        setLoading(false);
+        setError(response.error);
+        return response.error;
+      }
+
       setLoading(false);
-      setError(response.error);
-      return response.error;
+      setData(response.data);
+      return response.data;
     }
 
-    setLoading(false);
-    setData(response.data);
-    return response.data;
+    if (retry === false) {
+      try {
+        const data = await handler(...args);
+        setData(data);
+        setLoading(false);
+        return data;
+      }
+      catch (err) {
+        setError(err as null);
+        setLoading(false);
+        throw err;
+      }
+    }
   };
 
   useEffect(() => {

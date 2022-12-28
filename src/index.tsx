@@ -1,4 +1,4 @@
-import OAuthContextProvider from "contexts/OAuthContext";
+import UserContextProvider from "contexts/UserContext";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
@@ -10,9 +10,9 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <GlobalStyle />
 
     <AppContextProvider>
-      <OAuthContextProvider>
+      <UserContextProvider>
         <App />
-      </OAuthContextProvider>
+      </UserContextProvider>
     </AppContextProvider>
   </React.StrictMode>
 );

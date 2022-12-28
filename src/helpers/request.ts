@@ -14,3 +14,8 @@ export async function post(url: string, data: any, config?: AxiosRequestConfig<a
   const promise = axios.post(url, data, config);
   return promise as RequestPromise;
 }
+
+export async function put(url: string, data: any, config?: AxiosRequestConfig<any> | undefined) {
+  const promise = axios.put(url, data, config);
+  return promise as RequestPromise;
+}

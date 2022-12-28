@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { postSignIn } from "services/user-services";
 import styled from "styled-components";
 import GoogleButton from "react-google-button";
-import { useOAuthContext } from "contexts/OAuthContext";
+import { useUserContext } from "contexts/UserContext";
 
 export default function SignIn() {
   const [form, setForm] = useState({
@@ -15,7 +15,7 @@ export default function SignIn() {
     password: "",
   });
 
-  const { googleSignIn } = useOAuthContext();
+  const { getTokenWithGoogleOAuth } = useUserContext();
 
   const navigate = useNavigate();
 
@@ -96,8 +96,9 @@ export default function SignIn() {
 
       <OAuthButtons>
         <GoogleButton
-          onClick={() => {
-            googleSignIn();
+          onClick={async () => {
+            await getTokenWithGoogleOAuth();
+            navigate("/");
           }}
         ></GoogleButton>
       </OAuthButtons>

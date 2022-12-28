@@ -1,8 +1,9 @@
-import { useAppContext } from "contexts/AppContext";
+import { useUserContext } from "contexts/UserContext";
 import { useMemo } from "react";
+import { UserData } from "types/user-types";
 
 export function useConsoleLogVariables() {
-  const { userData } = useAppContext();
+  const { userData } = useUserContext();
 
   return useMemo(() => {
     const headerColor = "color: #ffbe88; font-weight: bold;";
@@ -26,6 +27,6 @@ export function useConsoleLogVariables() {
 
     console.clear();
     console.log(`%c\nuserData ${dependencyColor}(dependency)${resetColor}`, headerColor);
-    separateParams(userData);
+    separateParams(userData as UserData);
   }, [userData]);
 }
