@@ -150,4 +150,7 @@ const Logo = styled.div`
 
     padding-bottom: 25px;
   }
+  img {
+    object-fit: contain;
+  }
 `;
