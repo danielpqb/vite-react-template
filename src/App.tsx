@@ -40,10 +40,14 @@ export default function App() {
               element={
                 <ProtectedRoute
                   token={token}
-                  hasTokenPath={"/"}
+                  noTokenPath={"/"}
                 />
               }
             >
+              <Route
+                path="/user"
+                element={<></>}
+              />
               <Route
                 path="*"
                 element={<Navigate to="/sign-in" />}
