@@ -17,6 +17,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.47.0
   '@typescript-eslint/parser': ^5.47.0
   '@vitejs/plugin-react': ^3.0.0
+  animate.css: ^4.1.1
   autoprefixer: ^10.4.13
   axios: ^1.2.1
   babel-jest: ^29.3.1
@@ -47,6 +48,7 @@ specifiers:
   vite-tsconfig-paths: ^4.0.3
 
 dependencies:
+  animate.css: 4.1.1
   axios: 1.2.1
   firebase: 9.15.0
   promise-retry: 2.0.1
@@ -2929,6 +2931,10 @@ packages:
       json-schema-traverse: 0.4.1
       uri-js: 4.4.1
     dev: true
+
+  /animate.css/4.1.1:
+    resolution: {integrity: sha512-+mRmCTv6SbCmtYJCN4faJMNFVNN5EuCTTprDTAo7YzIGji2KADmakjVA3+8mVDkZ2Bf09vayB35lSQIex2+QaQ==}
+    dev: false
 
   /ansi-escapes/4.3.2:
     resolution: {integrity: sha512-gKXj5ALrKWQLsYG9jlTRmR/xKluxHV+Z9QEwNIgCfM1/uwPMCuzVVnh5mwTd+OuBZcwSIMbqssNWRm1lE51QaQ==}
