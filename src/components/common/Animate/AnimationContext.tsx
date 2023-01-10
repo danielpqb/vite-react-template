@@ -42,11 +42,15 @@ export default function AnimationContextProvider({ children }: { children: React
   }) {
     const animation: Animations = animations[id as keyof object];
     const element = animation?.element;
-    const _duration = (duration / 1000).toFixed(3).toString() + "s";
     if (!element) return;
+    if (direction.includes("alternate")) {
+      repeat *= 2;
+      duration /= 2;
+    }
+    const _duration = (duration / 1000).toFixed(3).toString() + "s";
 
     if (!animation.isAnimating) {
-      putAnimation(id, { isAnimating: true });
+      putAnimation(id, { isAnimating: true, isRemoved: false });
       element.style.animationName = name;
       element.style.animationDuration = _duration;
       element.style.animationIterationCount = repeat.toString();

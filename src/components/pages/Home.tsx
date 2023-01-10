@@ -12,7 +12,7 @@ export default function Home() {
     <Container>
       <Animation
         id={"icon"}
-        animateIn={{ name: "backInDown" }}
+        animateIn={{ name: "backInLeft" }}
       >
         <img
           src="/logo.svg"
@@ -22,9 +22,9 @@ export default function Home() {
               id: "icon",
               name: "backInLeft",
               duration: 1000,
-              repeat: 2,
+              repeat: 1,
               removeAfter: true,
-              direction: "alternate",
+              direction: "reverse",
               timing: "linear",
             });
           }}
@@ -33,7 +33,7 @@ export default function Home() {
 
       <Animation
         id={"icon2"}
-        animateIn={{ name: "backInDown" }}
+        animateIn={{ name: "backInRight" }}
       >
         <img
           src="/logo.svg"

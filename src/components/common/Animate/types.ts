@@ -1,11 +1,11 @@
 export type AnimationStates = {
   animations: { [id: string]: Animations };
-  putAnimation: (id: string, params: Partial<Omit<Animations, "id">>) => void;
+  putAnimation: (id: string, params: Animations) => void;
   animate: Animate;
 };
 
 export type Animations = {
-  element: HTMLElement;
+  element?: HTMLElement;
   isAnimating?: boolean;
   isRemoved?: boolean;
 };
@@ -18,7 +18,9 @@ type Animate = ({
   direction,
   timing,
   removeAfter,
-}: {
+}: AnimateProps) => void;
+
+export type AnimateProps = {
   id: string;
   name: AnimationNames;
   duration?: number;
@@ -35,7 +37,7 @@ type Animate = ({
     // eslint-disable-next-line @typescript-eslint/ban-types
     | (string & {});
   removeAfter?: boolean;
-}) => void;
+};
 
 /*
 Check website to test animations:

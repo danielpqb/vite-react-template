@@ -1,7 +1,7 @@
 import { ReactNode, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useAnimationContext } from "./AnimationContext";
-import { AnimationNames } from "./types";
+import { AnimateProps, AnimationNames } from "./types";
 
 export function Animation({
   id,
@@ -9,7 +9,7 @@ export function Animation({
   children,
 }: {
   id?: string;
-  animateIn?: { name: AnimationNames; duration?: number };
+  animateIn?: Omit<AnimateProps, "id">;
   children: ReactNode;
 }) {
   if (animateIn === undefined) {
@@ -22,23 +22,25 @@ export function Animation({
 
   const element = useRef(null);
 
-  const { animations, putAnimation, animate } = useAnimationContext();
-
-  const [isFirstRender, setIsFirstRender] = useState(true);
+  const { animations, putAnimation } = useAnimationContext();
 
   useEffect(() => {
     return () => {
       if (id && !animations[id]) {
-        putAnimation(id, { isAnimating: false, element: element.current || undefined });
+        putAnimation(id, {
+          isAnimating: true,
+          element: element.current || undefined,
+        });
+
+        setTimeout(() => {
+          putAnimation(id, {
+            isAnimating: false,
+          });
+          (element as any).current.style.animationName = "";
+        }, animateIn?.duration);
       }
     };
   }, []);
-
-  if (isFirstRender) {
-    animate({ id: id || "", name: animateIn.name, duration: animateIn.duration });
-    setIsFirstRender(false);
-    return <></>;
-  }
 
   return (
     <Container
