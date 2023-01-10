@@ -46,6 +46,7 @@ export function Animation({
       style={{
         animationName: animateIn.name,
         animationDuration: (animateIn.duration / 1000).toFixed(3).toString() + "s",
+        display: animations[id as keyof object]?.isRemoved === true ? "none" : undefined,
       }}
     >
       {children}

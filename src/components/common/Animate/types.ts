@@ -5,18 +5,36 @@ export type AnimationStates = {
 };
 
 export type Animations = {
-  isAnimating?: boolean;
   element: HTMLElement;
+  isAnimating?: boolean;
+  isRemoved?: boolean;
 };
 
 type Animate = ({
   id,
   name,
   duration,
+  repeat,
+  direction,
+  timing,
+  removeAfter,
 }: {
   id: string;
   name: AnimationNames;
   duration?: number;
+  repeat?: number;
+  direction?: "normal" | "reverse" | "alternate" | "alternate-reverse";
+  timing?:
+    | "ease"
+    | "ease-in"
+    | "ease-out"
+    | "ease-in-out"
+    | "linear"
+    | "step-start"
+    | "step-end"
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    | (string & {});
+  removeAfter?: boolean;
 }) => void;
 
 /*

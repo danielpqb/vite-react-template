@@ -23,7 +23,23 @@ export default function AnimationContextProvider({ children }: { children: React
     });
   }
 
-  function animate({ id, name, duration = 1000 }: { id: string; name: string; duration?: number }) {
+  function animate({
+    id,
+    name,
+    duration = 1000,
+    repeat = 1,
+    direction = "normal",
+    timing = "linear",
+    removeAfter = false,
+  }: {
+    id: string;
+    name: string;
+    duration?: number;
+    repeat?: number;
+    direction?: string;
+    timing?: string;
+    removeAfter?: boolean;
+  }) {
     const animation: Animations = animations[id as keyof object];
     const element = animation?.element;
     const _duration = (duration / 1000).toFixed(3).toString() + "s";
@@ -33,11 +49,18 @@ export default function AnimationContextProvider({ children }: { children: React
       putAnimation(id, { isAnimating: true });
       element.style.animationName = name;
       element.style.animationDuration = _duration;
+      element.style.animationIterationCount = repeat.toString();
+      element.style.animationDirection = direction;
+      element.style.animationTimingFunction = timing;
 
       setTimeout(() => {
         element.style.animationName = "";
+        if (removeAfter) {
+          putAnimation(id, { isRemoved: true });
+          element.classList.add("removed");
+        }
         putAnimation(id, { isAnimating: false });
-      }, duration);
+      }, duration * repeat);
     }
   }
 

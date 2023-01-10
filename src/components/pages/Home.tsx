@@ -18,7 +18,15 @@ export default function Home() {
           src="/logo.svg"
           alt=""
           onClick={() => {
-            animate({ id: "icon", name: "tada", duration: 1000 });
+            animate({
+              id: "icon",
+              name: "backInLeft",
+              duration: 1000,
+              repeat: 2,
+              removeAfter: true,
+              direction: "alternate",
+              timing: "linear",
+            });
           }}
         />
       </Animation>
