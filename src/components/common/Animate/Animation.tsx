@@ -1,35 +1,63 @@
-import { ReactNode, useEffect } from "react";
-import { useAnimation } from "./AnimationContext";
-import { useAnimate } from "./useAnimate";
+import { ReactNode, useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+import { useAnimationContext } from "./AnimationContext";
+import { AnimationNames } from "./types";
 
 export function Animation({
   id,
   animateIn,
-  duration,
   children,
 }: {
   id?: string;
-  animateIn?: string;
-  duration?: number;
+  animateIn?: { name: AnimationNames; duration?: number };
   children: ReactNode;
 }) {
-  animateIn = animateIn ? animateIn.replace("animate__", "") : animateIn;
-  const { addAnimation, changeAnimationState, animations } = useAnimation();
-  const { animateElement, AnimateElement } = useAnimate(animations, changeAnimationState);
+  if (animateIn === undefined) {
+    animateIn = { name: "fadeIn", duration: 1000 };
+  }
+  if (animateIn.duration === undefined) {
+    animateIn.duration = 1000;
+  }
+  animateIn.name = animateIn.name.replace("animate__", "") as AnimationNames;
+
+  const element = useRef(null);
+
+  const { animations, putAnimation, animate } = useAnimationContext();
+
+  const [isFirstRender, setIsFirstRender] = useState(true);
 
   useEffect(() => {
-    if (id) {
-      addAnimation({ id, animate: animateElement });
-    }
+    return () => {
+      if (id && !animations[id]) {
+        putAnimation(id, { isAnimating: false, element: element.current || undefined });
+      }
+    };
   }, []);
 
+  if (isFirstRender) {
+    animate({ id: id || "", name: animateIn.name, duration: animateIn.duration });
+    setIsFirstRender(false);
+    return <></>;
+  }
+
   return (
-    <AnimateElement
-      onFirstRender={() => {
-        animateElement({ name: animateIn || "", duration });
+    <Container
+      ref={element}
+      style={{
+        animationName: animateIn.name,
+        animationDuration: (animateIn.duration / 1000).toFixed(3).toString() + "s",
       }}
     >
       {children}
-    </AnimateElement>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  & {
+    display: inherit;
+    flex-direction: inherit;
+    width: fit-content;
+    height: fit-content;
+  }
+`;

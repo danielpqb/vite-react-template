@@ -1,4 +1,3 @@
-import { Animation } from "components/common/Animate/Animation";
 import { useAnimation } from "components/common/Animate/AnimationContext";
 import styled from "styled-components";
 
@@ -7,27 +6,39 @@ import { useAppContext } from "../../contexts/AppContext";
 export default function Home() {
   const { setAlert } = useAppContext();
 
-  const { animations } = useAnimation();
+  const { animate, Animation } = useAnimation();
 
   return (
     <Container>
       <Animation
         id={"icon"}
-        animateIn="backInDown"
+        animateIn={{ name: "backInDown" }}
       >
         <img
           src="/logo.svg"
           alt=""
           onClick={() => {
-            animations.icon.animate({ name: "tada" });
+            animate({ id: "icon", name: "tada", duration: 1000 });
+          }}
+        />
+      </Animation>
+
+      <Animation
+        id={"icon2"}
+        animateIn={{ name: "backInDown" }}
+      >
+        <img
+          src="/logo.svg"
+          alt=""
+          onClick={() => {
+            animate({ id: "icon2", name: "tada", duration: 1000 });
           }}
         />
       </Animation>
 
       <Animation
         id={"alertButton"}
-        animateIn="backInUp"
-        duration={1000}
+        animateIn={{ name: "backInUp", duration: 1000 }}
       >
         <ShowAlert
           onClick={() => {

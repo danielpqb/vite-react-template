@@ -8,11 +8,9 @@ import Message from "./Message";
 import Layout from "./Layout";
 import * as AlertTypes from "./types";
 import { defineProps } from "./functions";
-import { useAnimation } from "../Animate/AnimationContext";
 
 export default function Alert() {
   const { alert, setAlert } = useAppContext();
-  const { Animation, animations } = useAnimation();
 
   const { type, style, doThis, icon } = defineProps(alert);
 

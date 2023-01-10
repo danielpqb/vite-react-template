@@ -1,22 +1,29 @@
 export type AnimationStates = {
-  addAnimation: (params: Animations) => void;
-  changeAnimationState: (id: string, isAnimating: boolean) => void;
   animations: { [id: string]: Animations };
+  putAnimation: (id: string, params: Partial<Omit<Animations, "id">>) => void;
+  animate: Animate;
 };
 
 export type Animations = {
-  id: string;
-  animate: Animate;
   isAnimating?: boolean;
+  element: HTMLElement;
 };
 
-type Animate = ({ name, duration }: { name: AnimationNames; duration?: number }) => void;
+type Animate = ({
+  id,
+  name,
+  duration,
+}: {
+  id: string;
+  name: AnimationNames;
+  duration?: number;
+}) => void;
 
 /*
 Check website to test animations:
 https://animate.style/
 */
-type AnimationNames =
+export type AnimationNames =
   //Attention seekers
   | "bounce"
   | "flash"
