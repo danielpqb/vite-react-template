@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-types */
 export type AnimationStates = {
   animations: { [id: string]: Animations };
   putAnimation: (id: string, params: Animations) => void;
@@ -34,7 +35,6 @@ export type AnimateProps = {
     | "linear"
     | "step-start"
     | "step-end"
-    // eslint-disable-next-line @typescript-eslint/ban-types
     | (string & {});
   removeAfter?: boolean;
 };
@@ -171,4 +171,7 @@ export type AnimationNames =
   | "slideOutDown"
   | "slideOutLeft"
   | "slideOutRight"
-  | "slideOutUp";
+  | "slideOutUp"
+
+  //Any other name
+  | {};

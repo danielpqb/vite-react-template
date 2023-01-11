@@ -70,5 +70,5 @@ export default function AnimationContextProvider({ children }: { children: React
 
   const states = { animations, putAnimation, animate };
 
-  return <AnimationContext.Provider value={states}>{children}</AnimationContext.Provider>;
+  return <AnimationContext.Provider value={states as AnimationStates}>{children}</AnimationContext.Provider>;
 }

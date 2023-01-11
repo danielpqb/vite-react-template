@@ -18,7 +18,7 @@ export function Animation({
   if (animateIn.duration === undefined) {
     animateIn.duration = 1000;
   }
-  animateIn.name = animateIn.name.replace("animate__", "") as AnimationNames;
+  animateIn.name = (animateIn.name as string).replace("animate__", "") as AnimationNames;
 
   const element = useRef(null);
 
@@ -46,7 +46,7 @@ export function Animation({
     <Container
       ref={element}
       style={{
-        animationName: animateIn.name,
+        animationName: animateIn.name as string,
         animationDuration: (animateIn.duration / 1000).toFixed(3).toString() + "s",
         display: animations[id as keyof object]?.isRemoved === true ? "none" : undefined,
       }}
