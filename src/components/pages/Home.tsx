@@ -1,4 +1,4 @@
-import { useAnimation } from "components/common/Animate/AnimationContext";
+import { useAnimate, Animation } from "react-animate-with-css";
 import styled from "styled-components";
 
 import { useAppContext } from "../../contexts/AppContext";
@@ -6,7 +6,7 @@ import { useAppContext } from "../../contexts/AppContext";
 export default function Home() {
   const { setAlert } = useAppContext();
 
-  const { animate, Animation } = useAnimation();
+  const { animate } = useAnimate();
 
   return (
     <Container>
