@@ -1,4 +1,4 @@
-# React template build with Vite
+# React template built with Vite
 
 This is a [React](https://reactjs.org/) + [Vite](https://vitejs.dev/) template.
 
