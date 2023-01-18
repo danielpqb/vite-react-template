@@ -8,11 +8,14 @@ export default function Home() {
 
   const { animate } = useAnimate();
 
+  const style = { width: "fit-content", height: "fit-content", padding: "10px 0px" };
+
   return (
     <Container>
       <Animation
         id={"icon"}
         animateIn={{ name: "backInLeft" }}
+        style={style}
       >
         <img
           src="/logo.svg"
@@ -34,6 +37,7 @@ export default function Home() {
       <Animation
         id={"icon2"}
         animateIn={{ name: "backInRight" }}
+        style={style}
       >
         <img
           src="/logo.svg"
@@ -47,6 +51,7 @@ export default function Home() {
       <Animation
         id={"alertButton"}
         animateIn={{ name: "backInUp", duration: 1000 }}
+        style={style}
       >
         <ShowAlert
           onClick={() => {
